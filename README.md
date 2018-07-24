@@ -1,57 +1,60 @@
-# Project 1: Navigation
+### Project Details
+_The README describes the the project environment details (i.e., the state and action spaces, how reward is decided, and when the environment is considered solved)._
 
-### Introduction
+For this project an agent have been trained in the task of colecting **yellow bananas** while evading **blue bananas**.
 
-For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.  
+#### Action and State space
+To collect the bananas the agent can perform the following actions (one at the time): **move forward**, **move backward**, **turn left** or **turn right**.
 
-A reward of +1 is provided for collecting a yellow banana, and a reward of -1 is provided for collecting a blue banana.  Thus, the goal of your agent is to collect as many yellow bananas as possible while avoiding blue bananas.  
+The state space consists on 37 vectors including the agent's velocity, along with ray-based perception of objects around the agent's forward direction.
 
-The state space has 37 dimensions and contains the agent's velocity, along with ray-based perception of objects around agent's forward direction.  Given this information, the agent has to learn how to best select actions.  Four discrete actions are available, corresponding to:
+#### Reward function
+The agent gets a reward of **+1** for **yellow bananas** and **-1** for **blue bananas**.
 
-- **`0`** - move forward.
-- **`1`** - move backward.
-- **`2`** - turn left.
-- **`3`** - turn right.
+The environment is considered solved when the agent receive an average reward (over 100 episodes) of at least **+13**.
 
-The task is episodic, and in order to solve the environment, your agent must get an average score of +13 over 100 consecutive episodes.
+### Learning Algorithm
+_The report clearly describes the learning algorithm, along with the chosen hyperparameters. It also describes the model architectures for any neural networks._
 
-### Implementation Details
-
-- I used the Deep Q Network (DQN) algorithm, which was given as a template, with small modifications. 
-- I tried different activation functions, incuding leaky ReLU (slope: 0.2) in order to avoid dying ReLU problems and a small l2-regularization on the weights. 
-- The following hidden layers were used:
-
-`Net: (64 units, ReLU), (64 units, ReLU)`
-
-Final values of hyperparameters:
-
-```
-BUFFER_SIZE = int(1e5)
-BATCH_SIZE = 64       
-GAMMA = 0.9           
-TAU = 5e-3            
-LR = 5e-4             
-UPDATE_EVERY = 10     
-```
+To train the agent the code provided on the course was used. It implements the **Deep Q-Learning** algorithm, that uses neural networks to aproximate the Q value for **action - state pairs**.
 
 ### Getting Started
+_The README has instructions for installing dependencies or downloading needed files._
 
-1. Follow the [instructions](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md) to install Unity ML-Agents. 
+1. Follow the [instructions](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Installation.md) to install Unity ML-Agents.
+
 2. Navigate to the `p1_navigation/` folder, and run the command below to obtain a few more packages.
-
-```
+  ```
   pip3 install -r requirements.txt
-```
+  ```
 
-1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
+3. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
+    - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
+    - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
+    - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
+    - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
 
-   - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
-   - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
-   - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
-   - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
+    (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
 
-   (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
+    If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the environment.
 
-   If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the environment.
+4. Place the file in the DRLND GitHub repository, in the `p1_navigation/` folder, and unzip (or decompress) the file.
 
-2. Place the file in the DRLND GitHub repository, in the `p1_navigation/` folder, and unzip (or decompress) the file. 
+## Instructions
+
+_The README describes how to run the code in the repository, to train the agent. For additional resources on creating READMEs or using Markdown, see here and here._
+
+1. Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  To use a Jupyter notebook, run the following command from the `p1_navigation/` folder:
+
+   ```
+   jupyter notebook
+   ```
+
+   and open `Navigation.ipynb` from the list of files
+
+2. On the notebook replace any appearance of **Banana unity Environment** (for instance `../Banana_Linux/Banana.x86_64`) with the path to your own Banana environment.
+
+3. To start the training run the notebook code block under the **Train agent** header.
+
+4. To test it run the code block under the **Test agent** header (you might need to restart the Kernel first)
+
